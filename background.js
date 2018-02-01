@@ -30,7 +30,7 @@ browser.commands.onCommand.addListener((command) => {
                         code = 'document.querySelector(".spoticon-shuffle-16").click()';
                         break;
                     case "repeat": 
-                        code = 'document.querySelector(".spoticon-repeat-16").click()';
+                        code = '(document.querySelector(".spoticon-repeat-16") || document.querySelector(".spoticon-repeatonce-16")).click()';
                         break;
                 }
             }
