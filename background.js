@@ -18,7 +18,7 @@ browser.commands.onCommand.addListener((command) => {
             else if (tab.url.startsWith('https://open.spotify.com')) {
                 switch (command) {
                     case "play-pause": 
-                        code = '(document.querySelector(".spoticon-play-16") || document.querySelector(".spoticon-pause-16")).click()'; 
+                        code = '(document.querySelector(".spoticon-play-16") || document.querySelector(".spoticon-pause-16")).click()';
                         break;
                     case "next":
                         code = 'document.querySelector(".spoticon-skip-forward-16").click()';
@@ -29,8 +29,11 @@ browser.commands.onCommand.addListener((command) => {
                     case "shuffle":
                         code = 'document.querySelector(".spoticon-shuffle-16").click()';
                         break;
-                    case "repeat": 
+                    case "repeat":
                         code = '(document.querySelector(".spoticon-repeat-16") || document.querySelector(".spoticon-repeatonce-16")).click()';
+                        break;
+                    case "playGreen":
+                        code = 'document.querySelector(".btn-green").click()';
                         break;
                 }
             }

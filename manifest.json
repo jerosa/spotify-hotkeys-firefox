@@ -3,7 +3,7 @@
     "description": "Keyboard shortcuts to play, pause, next and previous tracks in Spotify Web Player.",
     "manifest_version": 2,
     "author": "TsunDoge",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "homepage_url": "https://github.com/TsunDoge/spotify-hotkeys-firefox",
     "icons": {
         "64": "icons/logo-64.png"
@@ -17,7 +17,7 @@
             "suggested_key": {
                 "default": "Alt+Shift+P"
             },
-            "description": "Send a 'toggle-feature' event to the extension"
+            "description": "Play/pause the current song"
         },
         "next": {
             "suggested_key": {
@@ -42,6 +42,12 @@
                 "default": "Alt+Shift+R"
             },
             "description": "Repeat playlist"
+        },
+        "playGreen": {
+            "suggested_key": {
+                "default": "Alt+Shift+B"
+            },
+            "description": "Play/pause the current playlist/album"
         }
     },
     "permissions": [ "https://open.spotify.com/*", "https://play.spotify.com/*", "tabs" ],
