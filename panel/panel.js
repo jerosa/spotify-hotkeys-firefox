@@ -10,14 +10,22 @@ function sendCommand(ev) {
 
 function createCommandMarkup(commandName, command) {
     const li = document.createElement("li");
-    li.innerHTML = `<p data-command=${commandName}>${commandName} - ${command.suggested_key.default}</p><p><small>${command.description}</small></p>`;
+    const p1 = document.createElement("p");
+    p1.dataset.command = `${commandName}`;
+    p1.appendChild(document.createTextNode(`${commandName} - ${command.suggested_key.default}`));
+    li.appendChild(p1);
+    const p2 = document.createElement("p");
+    const small = document.createElement("small");
+    small.appendChild(document.createTextNode(`${command.description}`));
+    p2.appendChild(small);
+    li.appendChild(p2);
     li.addEventListener("click", sendCommand);
     return li;
 }
 
 // Set title
 const content = document.querySelector("#title");
-content.innerHTML = manifest.name;
+content.appendChild(document.createTextNode(manifest.name));
 
 // Create the commands list
 const commandsFragment = document.createDocumentFragment();
