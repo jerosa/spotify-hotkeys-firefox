@@ -58,6 +58,7 @@
             "dark": "icons/logo-32.png",
             "size": 32
         }],
-        "default_title": "Spotify"
+        "default_title": "Spotify",
+        "default_popup": "panel/panel.html"
     }
 }
