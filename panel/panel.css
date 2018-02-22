@@ -1,0 +1,46 @@
+body {
+    font-family: sans-serif;
+    padding: 0 .5rem;
+    margin: 0;
+    background: rgb(40, 40, 40);
+    color: rgb(170, 170, 170);
+}
+
+#main {
+    padding: .5rem;
+}
+
+h2 {
+    color: rgb(30, 215, 96);
+    margin: .5rem 0;
+}
+
+p {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    padding: .2rem;
+    color: rgb(170, 170, 170);
+    border-right: 3px solid rgb(40, 40, 40);
+    cursor: pointer;
+}
+
+    li p::first-letter {
+        text-transform: uppercase;
+    }
+
+    small {
+        color: rgb(140, 140, 140);
+        pointer-events: none;
+    }
+
+li:hover {
+    color: white;
+    border-right: 3px solid rgb(30, 215, 96);
+}
