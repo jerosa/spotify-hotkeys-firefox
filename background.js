@@ -1,7 +1,4 @@
-/**
- * Fired when a registered command is activated using a keyboard shortcut.
- */
-browser.commands.onCommand.addListener((command) => {
+function runCommand(command) {
     browser.tabs.query({ url: 'https://*.spotify.com/*' }, (tabs) => {
 
         // Open a spotify tab if one does not exist yet.
@@ -42,4 +39,10 @@ browser.commands.onCommand.addListener((command) => {
             }
         }
     });
-});
+}
+
+/**
+ * Fired when a registered command is activated using a keyboard shortcut.
+ */
+browser.commands.onCommand.addListener(runCommand);
+browser.runtime.onMessage.addListener(runCommand);
