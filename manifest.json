@@ -43,7 +43,7 @@
             },
             "description": "Repeat playlist"
         },
-        "playGreen": {
+        "play-album": {
             "suggested_key": {
                 "default": "Alt+Shift+B"
             },

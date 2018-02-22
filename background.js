@@ -29,7 +29,7 @@ function runCommand(command) {
                     case "repeat":
                         code = '(document.querySelector(".spoticon-repeat-16") || document.querySelector(".spoticon-repeatonce-16")).click()';
                         break;
-                    case "playGreen":
+                    case "play-album":
                         code = 'document.querySelector(".btn-green").click()';
                         break;
                 }
