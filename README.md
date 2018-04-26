@@ -2,6 +2,8 @@
 
 This extension adds keyboard shortcuts to Firefox to play, pause, next and previous tracks in [Spotify Web Player](https://open.spotify.com).
 
+![(Screenshot of running extension)](images/Spotify.png)
+
 ## Usage
 
 Default Keyboard shortcuts are:
@@ -19,4 +21,8 @@ Instead of using the keybord it's possible to click on the icon of the toolbar w
 
 ## Installation
 
-You can find the official Firefox Extension at https://addons.mozilla.org/en-US/firefox/addon/spotify-hotkeys/
+You can find the signed Firefox Extension at https://addons.mozilla.org/en-US/firefox/addon/spotify-hotkeys/
+
+## Custom Shorcuts
+
+Visiting the option page of the addon (about:addons), it is possible to change the shortcuts. See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts#configure-shortcuts) for more information.
