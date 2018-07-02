@@ -128,7 +128,7 @@ const ShortcutCustomizeUI = {
             }
 
             keyField.setAttribute('type', 'text');
-            keyField.setAttribute('size', 8);
+            keyField.setAttribute('size', 15);
             keyField.addEventListener('input', update);
             keyField.addEventListener('blur', cleanKeyField);
             if (!this.available)
@@ -213,7 +213,7 @@ const ShortcutCustomizeUI = {
             case 'next':
             case 'medianexttrack':
             case 'mediatracknext':
-                return 'MediaTrackNext';
+                return 'MediaNextTrack';
             case 'play':
             case 'pause':
             case 'mediaplaypause':
@@ -222,7 +222,7 @@ const ShortcutCustomizeUI = {
             case 'previous':
             case 'mediaprevtrack':
             case 'mediatrackprev':
-                return 'MediaTrackPrev';
+                return 'MediaPrevTrack';
             case 'stop':
             case 'mediastop':
                 return 'MediaStop';
@@ -337,3 +337,7 @@ const ShortcutCustomizeUI = {
         );
     }
 };
+
+ShortcutCustomizeUI.build().then(list => {
+    document.getElementById('shortcuts').appendChild(list);
+});
