@@ -1,14 +1,15 @@
+/* global browser document */
 async function init() {
     const manifest = browser.runtime.getManifest();
     const commands = await browser.commands.getAll();
-    
+
     function sendCommand(ev) {
-        const command = ev.target.dataset.command;
+        const { command } = ev.target.dataset;
         if (command !== undefined) {
             browser.runtime.sendMessage(command);
         }
     }
-    
+
     function createCommandMarkup(commandName, command) {
         const li = document.createElement("li");
         const p1 = document.createElement("p");
@@ -27,7 +28,7 @@ async function init() {
     // Set title
     const content = document.querySelector("#title");
     content.appendChild(document.createTextNode(manifest.name));
-    
+
     // Create the commands list
     const commandsFragment = document.createDocumentFragment();
     for (const command in commands) {
