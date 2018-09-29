@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Hotkeys Options</title>
+    <link rel="stylesheet" href="options.css"/>
 </head>
 
 <body>
@@ -14,8 +15,17 @@
         <a href="https://github.com/TsunDoge/spotify-hotkeys-firefox/issues">Support</a>
     </p>
     <br />
+    <h1>Settings</h1>
+    <ul>
+        <li class="setting">
+            <input type="checkbox" id="chOpenSpotify">
+            <label for="chOpenSpotify">Open Spotify with shortcuts</label>
+        </li>
+    </ul>
+    <h1>Shortcuts</h1>
     <div id="shortcuts"></div>
     <script type="application/javascript" src="../scripts/ShortcutCustomizeUI.js"></script>
+    <script type="application/javascript" src="options.js"></script>
 </body>
 
 </html>

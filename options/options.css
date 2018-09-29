@@ -1,0 +1,11 @@
+.setting {
+    border-top: 1px solid ThreeDShadow;
+    display: block;
+    margin: 0 0 0.25em;
+    padding: 0.25em 0 0;
+}
+.setting:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+}

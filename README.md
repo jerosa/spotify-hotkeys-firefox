@@ -23,6 +23,16 @@ Instead of using the keybord it's possible to click on the icon of the toolbar w
 
 You can find the signed Firefox Extension at https://addons.mozilla.org/en-US/firefox/addon/spotify-hotkeys/
 
-## Custom Shorcuts
+## Option page
 
-Visiting the option page of the addon (about:addons), it is possible to change the shortcuts. See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts#configure-shortcuts) for more information.
+The option page of the extension allows the user to customize the shortcuts and some settings. See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts) for more information.
+
+### Settings
+
+The following options can be enabled/disabled in the option page.
+
+- Open Spotify with shortcuts: When the user hit a shortcut open spotify if it is not opened yet.
+
+### Custom Shorcuts
+
+It is possible to change the default shortcuts to custom ones. See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts#configure-shortcuts) for more information.
