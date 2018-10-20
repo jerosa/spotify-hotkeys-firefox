@@ -10,11 +10,11 @@ If we don't, then store the default settings.
 */
 function checkStoredSettings(storedSettings) {
     if (!storedSettings.openSpotify) {
-        browser.storage.local.set(defaultSettings);
+        browser.storage.sync.set(defaultSettings);
     }
 }
 
-const gettingStoredSettings = browser.storage.local.get();
+const gettingStoredSettings = browser.storage.sync.get();
 gettingStoredSettings.then(checkStoredSettings, error => console.error(error));
 
 
@@ -22,7 +22,7 @@ function runCommand(command) {
     browser.tabs.query({ url: "https://*.spotify.com/*" }, (tabs) => {
         // Open a spotify tab if one does not exist yet.
         if (tabs.length === 0) {
-            const gettingItem = browser.storage.local.get("openSpotify");
+            const gettingItem = browser.storage.sync.get("openSpotify");
             gettingItem.then((res) => {
                 // check if user has enabled the option
                 if (res.openSpotify) browser.tabs.create({ url: "https://open.spotify.com" });
