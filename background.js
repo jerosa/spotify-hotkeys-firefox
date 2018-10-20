@@ -9,8 +9,11 @@ On startup, check whether we have stored settings.
 If we don't, then store the default settings.
 */
 function checkStoredSettings(storedSettings) {
-    if (!storedSettings.openSpotify) {
-        browser.storage.sync.set(defaultSettings);
+    for (const key in defaultSettings) {
+        if (!storedSettings.hasOwnProperty(key)) {
+            browser.storage.sync.set(defaultSettings);
+            return;
+        }
     }
 }
 
