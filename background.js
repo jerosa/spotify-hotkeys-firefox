@@ -57,6 +57,9 @@ function runCommand(command) {
                     case "play-album":
                         code = "document.querySelector('.btn-green').click()";
                         break;
+                    case "track-add":
+                        code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-added-16')).click()";
+                        break;
                 }
             }
             if (code.length) {

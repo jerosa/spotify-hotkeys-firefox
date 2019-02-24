@@ -38,7 +38,7 @@
         },
         "shuffle": {
             "suggested_key": {
-                "default": "Alt+Shift+F"
+                "default": "Alt+Shift+S"
             },
             "description": "Shuffle playlist"
         },
@@ -53,6 +53,12 @@
                 "default": "Alt+Shift+B"
             },
             "description": "Play/pause the current playlist/album"
+        },
+        "track-add": {
+            "suggested_key": {
+                "default": "Alt+Shift+F"
+            },
+            "description": "Save track"
         }
     },
     "permissions": [ "https://open.spotify.com/*", "https://play.spotify.com/*", "tabs", "storage" ],
