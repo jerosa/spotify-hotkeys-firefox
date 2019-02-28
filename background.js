@@ -21,52 +21,57 @@ const gettingStoredSettings = browser.storage.sync.get();
 gettingStoredSettings.then(checkStoredSettings, error => console.error(error));
 
 
-function runCommand(command) {
-    browser.tabs.query({ url: "https://*.spotify.com/*" }, (tabs) => {
-        // Open a spotify tab if one does not exist yet.
-        if (tabs.length === 0) {
-            const gettingItem = browser.storage.sync.get("openSpotify");
-            gettingItem.then((res) => {
-                // check if user has enabled the option
-                if (res.openSpotify) browser.tabs.create({ url: "https://open.spotify.com" });
-            }, e => console.error(e));
-        }
+async function runCommand(command) {
+    const tabs = await browser.tabs.query({ url: "https://*.spotify.com/*" });
+    // Open a spotify tab if one does not exist yet.
+    if (tabs.length === 0) {
+        const gettingItem = browser.storage.sync.get("openSpotify");
+        gettingItem.then((res) => {
+            // check if user has enabled the option
+            if (res.openSpotify) browser.tabs.create({ url: "https://open.spotify.com" });
+        }, e => console.error(e));
+    }
 
-        // Apply command
-        for (const tab of tabs) {
-            let code = "";
-            if (tab.url.startsWith("https://play.spotify.com")) {
-                code = `document.getElementById('app-player').contentDocument.getElementById('${command}').click()`;
-            } else if (tab.url.startsWith("https://open.spotify.com")) {
-                switch (command) {
-                    case "play-pause":
-                        code = "(document.querySelector('.spoticon-play-16') || document.querySelector('.spoticon-pause-16')).click()";
-                        break;
-                    case "next":
-                        code = "document.querySelector('.spoticon-skip-forward-16').click()";
-                        break;
-                    case "previous":
-                        code = "document.querySelector('.spoticon-skip-back-16').click()";
-                        break;
-                    case "shuffle":
-                        code = "document.querySelector('.spoticon-shuffle-16').click()";
-                        break;
-                    case "repeat":
-                        code = "(document.querySelector('.spoticon-repeat-16') || document.querySelector('.spoticon-repeatonce-16')).click()";
-                        break;
-                    case "play-album":
-                        code = "document.querySelector('.btn-green').click()";
-                        break;
-                    case "track-add":
-                        code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-added-16')).click()";
-                        break;
+    // Apply command
+    for (const tab of tabs) {
+        let code = "";
+        if (tab.url.startsWith("https://play.spotify.com")) {
+            code = `document.getElementById('app-player').contentDocument.getElementById('${command}').click()`;
+        } else if (tab.url.startsWith("https://open.spotify.com")) {
+            switch (command) {
+                case "play-pause":
+                    code = "(document.querySelector('.spoticon-play-16') || document.querySelector('.spoticon-pause-16')).click()";
+                    break;
+                case "next":
+                    code = "document.querySelector('.spoticon-skip-forward-16').click()";
+                    break;
+                case "previous":
+                    code = "document.querySelector('.spoticon-skip-back-16').click()";
+                    break;
+                case "shuffle":
+                    code = "document.querySelector('.spoticon-shuffle-16').click()";
+                    break;
+                case "repeat":
+                    code = "(document.querySelector('.spoticon-repeat-16') || document.querySelector('.spoticon-repeatonce-16')).click()";
+                    break;
+                case "play-album":
+                    code = "document.querySelector('.btn-green').click()";
+                    break;
+                case "track-add": {
+                    // CHECK: Region difference (heart/add)
+                    let checkCode = "document.querySelector('.control-button').classList.contains('spoticon-heart-16') || ";
+                    checkCode += "document.querySelector('.control-button').classList.contains('spoticon-heart-active-16')";
+                    const res = await browser.tabs.executeScript(tab.id, { code: checkCode });
+                    if (res[0]) code = "(document.querySelector('.spoticon-heart-16') || document.querySelector('.spoticon-heart-active-16')).click()";
+                    else code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-add-active-16')).click()";
+                    break;
                 }
             }
-            if (code.length) {
-                browser.tabs.executeScript(tab.id, { code: code });
-            }
         }
-    });
+        if (code.length) {
+            browser.tabs.executeScript(tab.id, { code: code });
+        }
+    }
 }
 
 /**
