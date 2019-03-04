@@ -63,7 +63,7 @@ async function runCommand(command) {
                     checkCode += "document.querySelector('.control-button').classList.contains('spoticon-heart-active-16')";
                     const res = await browser.tabs.executeScript(tab.id, { code: checkCode });
                     if (res[0]) code = "(document.querySelector('.spoticon-heart-16') || document.querySelector('.spoticon-heart-active-16')).click()";
-                    else code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-add-active-16')).click()";
+                    else code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-added-16')).click()";
                     break;
                 }
             }
