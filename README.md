@@ -11,9 +11,10 @@ Default Keyboard shortcuts are:
 - Play/Pause : Alt+Shift+P
 - Next       : Alt+Shift+Right Arrow
 - Previous   : Alt+Shift+Left Arrow
-- Shuffle    : Alt+Shift+F
+- Shuffle    : Alt+Shift+D
 - Repeat     : Alt+Shift+R
 - Play-Album : Alt+Shift+B
+- Save Track : Alt+Shift+F
 
 The `Play Album or PlayGreen` shortcut play also play/pause the songs like the `Play/Pause` shortcut but is useful when Spotify Web Player gets stuck with an add.
 
@@ -36,3 +37,5 @@ The following options can be enabled/disabled in the option page.
 ### Custom Shorcuts
 
 It is possible to change the default shortcuts to custom ones. See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts#configure-shortcuts) for more information.
+
+**NOTE:** On Firefox >= 66.0-build3 or Firefox >= 67.0a1 a new interface has been implemented to change the default shortcuts. See the [issue](https://bugzilla.mozilla.org/show_bug.cgi?id=1303384)

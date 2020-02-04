@@ -32,12 +32,13 @@ async function runCommand(command) {
         }, e => console.error(e));
     }
 
-    // Apply command
-    for (const tab of tabs) {
+    let i = 0;
+    let executed = false;
+    while (i < tabs.length && !executed) {
         let code = "";
-        if (tab.url.startsWith("https://play.spotify.com")) {
+        if (tabs[i].url.startsWith("https://play.spotify.com")) {
             code = `document.getElementById('app-player').contentDocument.getElementById('${command}').click()`;
-        } else if (tab.url.startsWith("https://open.spotify.com")) {
+        } else if (tabs[i].url.startsWith("https://open.spotify.com")) {
             switch (command) {
                 case "play-pause":
                     code = "(document.querySelector('.spoticon-play-16') || document.querySelector('.spoticon-pause-16')).click()";
@@ -61,7 +62,7 @@ async function runCommand(command) {
                     // CHECK: Region difference (heart/add)
                     let checkCode = "document.querySelector('.control-button').classList.contains('spoticon-heart-16') || ";
                     checkCode += "document.querySelector('.control-button').classList.contains('spoticon-heart-active-16')";
-                    const res = await browser.tabs.executeScript(tab.id, { code: checkCode });
+                    const res = await browser.tabs.executeScript(tabs[i].id, { code: checkCode });
                     if (res[0]) code = "(document.querySelector('.spoticon-heart-16') || document.querySelector('.spoticon-heart-active-16')).click()";
                     else code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-added-16')).click()";
                     break;
@@ -69,8 +70,10 @@ async function runCommand(command) {
             }
         }
         if (code.length) {
-            browser.tabs.executeScript(tab.id, { code: code });
+            browser.tabs.executeScript(tabs[i].id, { code: code });
+            executed = true;
         }
+        i++;
     }
 }
 
