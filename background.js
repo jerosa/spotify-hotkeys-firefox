@@ -58,7 +58,7 @@ async function runCommand(command) {
                 case "play-album":
                     code = "document.querySelector('.btn-green').click()";
                     break;
-                case "track-add": {
+                case "save-track": {
                     // CHECK: Region difference (heart/add)
                     let checkCode = "document.querySelector('.control-button').classList.contains('spoticon-heart-16') || ";
                     checkCode += "document.querySelector('.control-button').classList.contains('spoticon-heart-active-16')";

@@ -54,7 +54,7 @@
             },
             "description": "Play/pause the current playlist/album"
         },
-        "track-add": {
+        "save-track": {
             "suggested_key": {
                 "default": "Alt+Shift+F"
             },
