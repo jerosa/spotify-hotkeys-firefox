@@ -67,6 +67,10 @@ async function runCommand(command) {
                     else code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-added-16')).click()";
                     break;
                 }
+                case "mute": {
+                    code = "document.querySelector('.volume-bar__icon').click()";
+                    break;
+                }
             }
         }
         if (code.length) {

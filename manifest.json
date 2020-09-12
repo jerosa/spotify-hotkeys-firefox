@@ -59,6 +59,12 @@
                 "default": "Alt+Shift+F"
             },
             "description": "Save track"
+        },
+        "mute": {            
+            "suggested_key": {
+                "default": "Alt+Shift+M"
+            },
+            "description": "Mute/Unmute"
         }
     },
     "permissions": [ "https://open.spotify.com/*", "https://play.spotify.com/*", "tabs", "storage" ],
