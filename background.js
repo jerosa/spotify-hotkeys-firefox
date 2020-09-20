@@ -1,7 +1,8 @@
 /* global browser */
 
 const defaultSettings = {
-    openSpotify: true
+    openSpotify: true,
+    spotifyNotifications: true
 };
 
 /*
@@ -82,12 +83,17 @@ async function runCommand(command) {
 }
 
 function createNotification(request) {
-    browser.notifications.create("spotifyNotification", {
-        type: "basic",
-        iconUrl: request.data.image,
-        title: request.data.name,
-        message: `Artists: ${request.data.artists}`
-    });
+    const gettingItem = browser.storage.sync.get("spotifyNotifications");
+    gettingItem.then(res => {
+        if (res.spotifyNotifications) {
+            browser.notifications.create("spotifyNotification", {
+                type: "basic",
+                iconUrl: request.data.image,
+                title: request.data.name,
+                message: `Artists: ${request.data.artists}`
+            });
+        } else { console.log("Notifications are disabled"); }
+    }, e => console.error(e));
 }
 
 /**
