@@ -81,8 +81,26 @@ async function runCommand(command) {
     }
 }
 
+function createNotification(request) {
+    browser.notifications.create("spotifyNotification", {
+        type: "basic",
+        iconUrl: request.data.image,
+        title: request.data.name,
+        message: `Artists: ${request.data.artists}`
+    });
+}
+
 /**
  * Fired when a registered command is activated using a keyboard shortcut.
  */
 browser.commands.onCommand.addListener(runCommand);
 browser.runtime.onMessage.addListener(runCommand);
+// eslint-disable-next-line no-unused-vars
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // console.log(request);
+    // console.log(sender);
+    // console.log(sendResponse);
+    if (request.src === "spotifyNotifications.notification") {
+        createNotification(request);
+    }
+});
