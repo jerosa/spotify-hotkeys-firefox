@@ -18,7 +18,7 @@ Default Keyboard shortcuts are:
 - Mute/Unmute : Alt + Shift + M
 ```
 
-The `Play Album or PlayGreen` shortcut play also play/pause the songs like the `Play/Pause` shortcut but is useful when Spotify Web Player gets stuck with an add.
+The `Play Album or PlayGreen` shortcut play also play/pause the songs like the `Play/Pause` shortcut but is useful when Spotify Web Player gets stuck with an ad.
 
 Instead of using the keybord it's possible to click on the icon of the toolbar which will show the keybindings.
 
@@ -30,9 +30,9 @@ You can find the signed Firefox Extension at https://addons.mozilla.org/en-US/fi
 
 You can now change your extensions' keyboard shortcuts on the add-ons page.
 
-1. Click the menu button Fx57menu , click Fx57Addons-icon Add-ons and select Extensions.
+1. Click the menu button, click `Add-ons` and select `Extensions`.
 2. Click the Tools for all add-ons cogwheel.
-3. Click Manage Extension Shortcuts in the menu.
+3. Click `Manage Extension Shortcuts` in the menu.
 4. You will see the shortcut options (if available) for your installed add-ons. 
 
 ![(Screenshot of managing extension shortcuts 1)](images/ManageExtensions1.png)
@@ -47,6 +47,7 @@ The option page of the extension allows the user to customize the shortcuts and 
 The following options can be enabled/disabled in the option page.
 
 - Open Spotify with shortcuts: When the user hit a shortcut open spotify if it is not opened yet.
+- Create notifications when song changes
 
 ### Custom Shorcuts **(legacy)**
 
