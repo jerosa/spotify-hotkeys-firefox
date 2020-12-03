@@ -21,6 +21,15 @@ function checkStoredSettings(storedSettings) {
 const gettingStoredSettings = browser.storage.sync.get();
 gettingStoredSettings.then(checkStoredSettings, error => console.error(error));
 
+// Spotify decided to use randomized CSS classes for some of their buttons
+// For this reason the button indexes are used.
+const CONTROL_BUTTON_INDEXES = {
+    SHUFFLE: 0,
+    PREVIOUS: 1,
+    PLAY: 2,
+    NEXT: 3,
+    REPEAT: 4
+};
 
 async function runCommand(command) {
     const tabs = await browser.tabs.query({ url: "https://*.spotify.com/*" });
@@ -42,28 +51,25 @@ async function runCommand(command) {
         } else if (tabs[i].url.startsWith("https://open.spotify.com")) {
             switch (command) {
                 case "play-pause":
-                    code = `(document.querySelector(".player-controls__buttons button[title='Play']") ||
-                    document.querySelector(".player-controls__buttons button[title='Pause']")).click()`;
+                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PLAY}].click()`;
                     break;
                 case "next":
-                    code = `document.querySelector(".player-controls__buttons button[title='Next']").click()`;
+                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.NEXT}].click()`;
                     break;
                 case "previous":
-                    code = `document.querySelector(".player-controls__buttons button[title='Previous']").click()`;
+                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PREVIOUS}].click()`;
                     break;
                 case "shuffle":
-                    code = `(document.querySelector(".player-controls__buttons button[title='Enable shuffle']") ||
-                    document.querySelector(".player-controls__buttons button[title='Disable shuffle']")).click()`;
+                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.SHUFFLE}].click()`;
                     break;
                 case "repeat":
-                    code = "(document.querySelector('.spoticon-repeat-16') || document.querySelector('.spoticon-repeatonce-16')).click()";
+                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.REPEAT}].click()`;
                     break;
                 case "play-album":
                     code = `document.querySelector("[data-testid='play-button']").click()`;
                     break;
                 case "save-track": {
-                    code = `(document.querySelector(".now-playing button[title='Save to Your Library']") ||
-                    document.querySelector(".now-playing button[title='Remove from Your Library']")).click()`;
+                    code = `document.querySelector(".control-button-heart button").click()`;
                     break;
                 }
                 case "mute": {
