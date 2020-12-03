@@ -10,11 +10,13 @@ var notifications = {
 
     getTrackData(trackInfo) {
         const elements = trackInfo.querySelectorAll("a");
-        if (elements.length !== 3) throw console.error("Not found correct elements");
+        if (elements.length < 3) throw console.error("Not found correct track info");
 
-        const trackName = elements[1].textContent;
-        const trackArtists = elements[2].textContent;
-        const trackImage = elements[0].querySelector(".now-playing__cover-art img").src;
+        const [image, track, ...artists] = elements;
+        const trackImage = image.querySelector(".now-playing__cover-art img").src;
+        const trackName = track.textContent;
+        const trackArtists = artists.map(e => e.textContent).join(", ");
+
         return {
             name: trackName,
             artists: trackArtists,
