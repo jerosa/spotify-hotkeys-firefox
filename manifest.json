@@ -30,7 +30,7 @@
     "commands": {
         "play-pause": {
             "suggested_key": {
-                "default": "Alt+Shift+P"
+                "default": "Alt+Shift+W"
             },
             "description": "Play/pause the current song"
         },
@@ -60,13 +60,13 @@
         },
         "play-album": {
             "suggested_key": {
-                "default": "Alt+Shift+B"
+                "default": "Alt+Shift+G"
             },
             "description": "Play/pause the current playlist/album"
         },
         "save-track": {
             "suggested_key": {
-                "default": "Alt+Shift+F"
+                "default": "Alt+Shift+L"
             },
             "description": "Save track"
         },

@@ -8,13 +8,13 @@ This extension adds keyboard shortcuts to Firefox to play, pause, next and previ
 
 Default Keyboard shortcuts are:
 ```
-- Play/Pause  : Alt + Shift + P
+- Play/Pause  : Alt + Shift + W
 - Next        : Alt + Shift + Right Arrow
 - Previous    : Alt + Shift + Left Arrow
 - Shuffle     : Alt + Shift + D
 - Repeat      : Alt + Shift + R
-- Play-Album  : Alt + Shift + B
-- Save Track  : Alt + Shift + F
+- Play-Album  : Alt + Shift + G
+- Save Track  : Alt + Shift + L
 - Mute/Unmute : Alt + Shift + M
 ```
 
