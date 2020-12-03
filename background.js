@@ -90,6 +90,7 @@ function createNotification(request) {
                 title: request.data.name,
                 message: `Artists: ${request.data.artists}`
             });
+            setTimeout(() => browser.notifications.clear("spotifyNotification"), 3000);
         } else { console.log("Notifications are disabled"); }
     }, e => console.error(e));
 }
