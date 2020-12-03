@@ -42,30 +42,28 @@ async function runCommand(command) {
         } else if (tabs[i].url.startsWith("https://open.spotify.com")) {
             switch (command) {
                 case "play-pause":
-                    code = "(document.querySelector('.spoticon-play-16') || document.querySelector('.spoticon-pause-16')).click()";
+                    code = `(document.querySelector(".player-controls__buttons button[title='Play']") ||
+                    document.querySelector(".player-controls__buttons button[title='Pause']")).click()`;
                     break;
                 case "next":
-                    code = "document.querySelector('.spoticon-skip-forward-16').click()";
+                    code = `document.querySelector(".player-controls__buttons button[title='Next']").click()`;
                     break;
                 case "previous":
-                    code = "document.querySelector('.spoticon-skip-back-16').click()";
+                    code = `document.querySelector(".player-controls__buttons button[title='Previous']").click()`;
                     break;
                 case "shuffle":
-                    code = "document.querySelector('.spoticon-shuffle-16').click()";
+                    code = `(document.querySelector(".player-controls__buttons button[title='Enable shuffle']") ||
+                    document.querySelector(".player-controls__buttons button[title='Disable shuffle']")).click()`;
                     break;
                 case "repeat":
                     code = "(document.querySelector('.spoticon-repeat-16') || document.querySelector('.spoticon-repeatonce-16')).click()";
                     break;
                 case "play-album":
-                    code = "document.querySelector('.btn-green').click()";
+                    code = `document.querySelector("[data-testid='play-button']").click()`;
                     break;
                 case "save-track": {
-                    // CHECK: Region difference (heart/add)
-                    let checkCode = "document.querySelector('.control-button').classList.contains('spoticon-heart-16') || ";
-                    checkCode += "document.querySelector('.control-button').classList.contains('spoticon-heart-active-16')";
-                    const res = await browser.tabs.executeScript(tabs[i].id, { code: checkCode });
-                    if (res[0]) code = "(document.querySelector('.spoticon-heart-16') || document.querySelector('.spoticon-heart-active-16')).click()";
-                    else code = "(document.querySelector('.spoticon-add-16') || document.querySelector('.spoticon-added-16')).click()";
+                    code = `(document.querySelector(".now-playing button[title='Save to Your Library']") ||
+                    document.querySelector(".now-playing button[title='Remove from Your Library']")).click()`;
                     break;
                 }
                 case "mute": {
@@ -75,7 +73,7 @@ async function runCommand(command) {
             }
         }
         if (code.length) {
-            browser.tabs.executeScript(tabs[i].id, { code: code });
+            browser.tabs.executeScript(tabs[i].id, { code: code }).catch(e => console.log(e));
             executed = true;
         }
         i++;
@@ -103,9 +101,6 @@ browser.commands.onCommand.addListener(runCommand);
 browser.runtime.onMessage.addListener(runCommand);
 // eslint-disable-next-line no-unused-vars
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    // console.log(request);
-    // console.log(sender);
-    // console.log(sendResponse);
     if (request.src === "spotifyNotifications.notification") {
         createNotification(request);
     }
