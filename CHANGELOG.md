@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.2] - 2020-12-03
+### Added
+- Display notification with track info when the song have multiple artists.
+
+### Fixed
+- Query now playing buttons and get them by index, title differs by browser language.
+
 ## [1.5.1] - 2020-12-03
 ### Added
 - Add timeout of 3 seconds to the notifications.
