@@ -69,7 +69,7 @@ async function runCommand(command) {
                     code = `document.querySelector("[data-testid='play-button']").click()`;
                     break;
                 case "save-track": {
-                    code = `document.querySelector(".control-button-heart button").click()`;
+                    code = `document.querySelector("button.control-button-heart").click()`;
                     break;
                 }
                 case "mute": {
