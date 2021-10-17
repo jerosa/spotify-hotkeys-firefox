@@ -11,7 +11,7 @@ If we don't, then store the default settings.
 */
 function checkStoredSettings(storedSettings) {
     for (const key in defaultSettings) {
-        if (!storedSettings.hasOwnProperty(key)) {
+        if (!Object.prototype.hasOwnProperty.call(storedSettings, key)) {
             browser.storage.sync.set(defaultSettings);
             return;
         }
@@ -32,13 +32,18 @@ const CONTROL_BUTTON_INDEXES = {
 };
 
 async function runCommand(command) {
-    const tabs = await browser.tabs.query({ url: "https://*.spotify.com/*" });
+    const tabs = await browser.tabs.query({
+        url: "https://*.spotify.com/*"
+    });
     // Open a spotify tab if one does not exist yet.
     if (tabs.length === 0) {
         const gettingItem = browser.storage.sync.get("openSpotify");
         gettingItem.then((res) => {
-            // check if user has enabled the option
-            if (res.openSpotify) browser.tabs.create({ url: "https://open.spotify.com" });
+            if (res.openSpotify) {
+                browser.tabs.create({
+                    url: "https://open.spotify.com"
+                });
+            }
         }, e => console.error(e));
     }
 
@@ -51,19 +56,19 @@ async function runCommand(command) {
         } else if (tabs[i].url.startsWith("https://open.spotify.com")) {
             switch (command) {
                 case "play-pause":
-                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PLAY}].click()`;
+                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PLAY}].click()`;
                     break;
                 case "next":
-                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.NEXT}].click()`;
+                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.NEXT}].click()`;
                     break;
                 case "previous":
-                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PREVIOUS}].click()`;
+                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PREVIOUS}].click()`;
                     break;
                 case "shuffle":
-                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.SHUFFLE}].click()`;
+                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.SHUFFLE}].click()`;
                     break;
                 case "repeat":
-                    code = `document.querySelectorAll('.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.REPEAT}].click()`;
+                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.REPEAT}].click()`;
                     break;
                 case "play-album":
                     code = `document.querySelector("[data-testid='play-button']").click()`;
@@ -73,13 +78,15 @@ async function runCommand(command) {
                     break;
                 }
                 case "mute": {
-                    code = "document.querySelector('.volume-bar__icon').click()";
+                    code = "document.querySelector('.volume-bar button').click()";
                     break;
                 }
             }
         }
         if (code.length) {
-            browser.tabs.executeScript(tabs[i].id, { code: code }).catch(e => console.log(e));
+            browser.tabs.executeScript(tabs[i].id, {
+                code: code
+            }).catch(e => console.log(e));
             executed = true;
         }
         i++;
@@ -97,7 +104,9 @@ function createNotification(request) {
                 message: `Artists: ${request.data.artists}`
             });
             setTimeout(() => browser.notifications.clear("spotifyNotification"), 3000);
-        } else { console.log("Notifications are disabled"); }
+        } else {
+            console.log("Notifications are disabled");
+        }
     }, e => console.error(e));
 }
 
