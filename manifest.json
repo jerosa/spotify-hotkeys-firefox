@@ -75,6 +75,18 @@
                 "default": "Alt+Shift+M"
             },
             "description": "Mute/Unmute"
+        },
+        "volume-up": {
+            "suggested_key": {
+                "default": "Alt+Shift+Up"
+            },
+            "description": "Volume up"
+        },
+        "volume-down": {
+            "suggested_key": {
+                "default": "Alt+Shift+Down"
+            },
+            "description": "Volume down"
         }
     },
     "permissions": ["https://open.spotify.com/*", "https://play.spotify.com/*", "tabs", "storage", "notifications"],
