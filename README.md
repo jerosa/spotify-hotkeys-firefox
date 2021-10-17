@@ -16,6 +16,8 @@ Default Keyboard shortcuts are:
 - Play-Album  : Alt + Shift + G
 - Save Track  : Alt + Shift + L
 - Mute/Unmute : Alt + Shift + M
+- Volume Up   : Alt + Shift + Up Arrow
+- Volume Down : Alt + Shift + Down Arrow
 ```
 
 The `Play Album or PlayGreen` shortcut play also play/pause the songs like the `Play/Pause` shortcut but is useful when Spotify Web Player gets stuck with an ad.
