@@ -56,9 +56,12 @@ async function runCommand(command) {
     let executed = false;
     while (i < tabs.length && !executed) {
         let code = "";
-        if (tabs[i].url.startsWith("https://play.spotify.com")) {
+        const {
+            hostname
+        } = new URL(tabs[i].url);
+        if (hostname === "play.spotify.com") {
             code = `document.getElementById('app-player').contentDocument.getElementById('${command}').click()`;
-        } else if (tabs[i].url.startsWith("https://open.spotify.com")) {
+        } else if (hostname === "open.spotify.com") {
             switch (command) {
                 case "play-pause":
                     code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PLAY}].click()`;
