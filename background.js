@@ -1,4 +1,4 @@
-/* global browser */
+/* global browser document window WheelEvent */
 
 const defaultSettings = {
     openSpotify: true,
@@ -33,7 +33,7 @@ const CONTROL_BUTTON_INDEXES = {
 
 const CONTROL_VOLUME_DELTA = {
     UP: -60,
-    DOWN: 60,
+    DOWN: 60
 };
 
 async function runCommand(command) {
@@ -108,13 +108,13 @@ async function runCommand(command) {
 
 function getVolumeCode(volumeDelta) {
     function setVolume() {
-        const volumeElement = document.querySelector('.volume-bar');
+        const volumeElement = document.querySelector(".volume-bar");
 
         if (!volumeElement) {
             return;
         }
 
-        const event = new WheelEvent('wheel', {
+        const event = new WheelEvent("wheel", {
             bubbles: true,
             cancelable: true,
             view: window,

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix heart selector
+- Fix mute selector
+
 ## [1.5.2] - 2020-12-03
 ### Added
 - Display notification with track info when the song have multiple artists.
