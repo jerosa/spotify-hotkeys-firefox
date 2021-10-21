@@ -1,0 +1,24 @@
+{
+  "name": "spotify-hotkeys-firefox",
+  "version": "1.5.2",
+  "description": "This extension adds keyboard shortcuts to Firefox to play, pause, next and previous tracks in Spotify Web Player",
+  "main": "background.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^8.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerosa/spotify-hotkeys-firefox.git"
+  },
+  "author": "jerosa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jerosa/spotify-hotkeys-firefox/issues"
+  },
+  "homepage": "https://github.com/jerosa/spotify-hotkeys-firefox#readme"
+}
