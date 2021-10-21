@@ -31,6 +31,11 @@ const CONTROL_BUTTON_INDEXES = {
     REPEAT: 4
 };
 
+const CONTROL_VOLUME_DELTA = {
+    UP: -60,
+    DOWN: 60,
+};
+
 async function runCommand(command) {
     const tabs = await browser.tabs.query({
         url: "https://*.spotify.com/*"
@@ -81,6 +86,14 @@ async function runCommand(command) {
                     code = "document.querySelector('.volume-bar button').click()";
                     break;
                 }
+                case "volume-up": {
+                    code = getVolumeCode(CONTROL_VOLUME_DELTA.UP);
+                    break;
+                }
+                case "volume-down": {
+                    code = getVolumeCode(CONTROL_VOLUME_DELTA.DOWN);
+                    break;
+                }
             }
         }
         if (code.length) {
@@ -91,6 +104,27 @@ async function runCommand(command) {
         }
         i++;
     }
+}
+
+function getVolumeCode(volumeDelta) {
+    function setVolume() {
+        const volumeElement = document.querySelector('.volume-bar');
+
+        if (!volumeElement) {
+            return;
+        }
+
+        const event = new WheelEvent('wheel', {
+            bubbles: true,
+            cancelable: true,
+            view: window,
+            deltaY: volumeDelta
+        });
+
+        volumeElement.dispatchEvent(event);
+    }
+
+    return `var volumeDelta=${volumeDelta}; ${setVolume} setVolume();`;
 }
 
 function createNotification(request) {
