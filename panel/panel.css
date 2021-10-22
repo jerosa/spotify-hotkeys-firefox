@@ -4,6 +4,7 @@ body {
     margin: 0;
     background: rgb(40, 40, 40);
     color: rgb(170, 170, 170);
+    user-select: none;
 }
 
 #main {
@@ -37,7 +38,6 @@ li {
 
     small {
         color: rgb(140, 140, 140);
-        pointer-events: none;
     }
 
 li:hover {
