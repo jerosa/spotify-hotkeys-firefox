@@ -13,7 +13,7 @@ body {
 
 h2 {
     color: rgb(30, 215, 96);
-    margin: .5rem 0;
+    margin: .5rem .5rem;
 }
 
 p {
@@ -26,7 +26,7 @@ ul {
 
 li {
     list-style: none;
-    padding: .2rem;
+    padding: .2rem .5rem;
     color: rgb(170, 170, 170);
     border-right: 3px solid rgb(40, 40, 40);
     cursor: pointer;
@@ -42,5 +42,6 @@ li {
 
 li:hover {
     color: white;
+    background: linear-gradient(270deg, rgb(40, 40, 40), rgb(25, 25, 25));
     border-right: 3px solid rgb(30, 215, 96);
 }
