@@ -3,11 +3,11 @@
  original:
    http://github.com/piroor/webextensions-lib-shortcut-customize-ui
 */
-
+/* eslint-disable max-depth */
+/* eslint-disable max-len */
 /* global browser navigator document CustomEvent*/
 const ShortcutCustomizeUI = {
-    available:
-        typeof browser.commands.update === "function" &&
+    available: typeof browser.commands.update === "function" &&
         typeof browser.commands.reset === "function",
 
     uniqueKey: parseInt(Math.random() * Math.pow(2, 16)),
@@ -65,12 +65,22 @@ const ShortcutCustomizeUI = {
 
             const update = () => {
                 const key = this.normalizeKey(keyField.value);
-                if (!key) { return; }
+                if (!key) {
+                    return;
+                }
                 const shortcut = [];
-                if (altLabel.checkbox.checked) { shortcut.push("Alt"); }
-                if (ctrlLabel.checkbox.checked) { shortcut.push(isMac ? "MacCtrl" : "Ctrl"); }
-                if (metaLabel.checkbox.checked) { shortcut.push("Command"); }
-                if (shiftLabel.checkbox.checked) { shortcut.push("Shift"); }
+                if (altLabel.checkbox.checked) {
+                    shortcut.push("Alt");
+                }
+                if (ctrlLabel.checkbox.checked) {
+                    shortcut.push(isMac ? "MacCtrl" : "Ctrl");
+                }
+                if (metaLabel.checkbox.checked) {
+                    shortcut.push("Command");
+                }
+                if (shiftLabel.checkbox.checked) {
+                    shortcut.push("Shift");
+                }
                 shortcut.push(key);
                 command.currentUnmodifedHotkey = key;
                 const fullShortcut = shortcut.join("+");
@@ -100,7 +110,9 @@ const ShortcutCustomizeUI = {
                 browser.commands.reset(command.name);
                 browser.commands.getAll().then(aCommands => {
                     for (const defaultCommand of aCommands) {
-                        if (defaultCommand.name !== command.name) { continue; }
+                        if (defaultCommand.name !== command.name) {
+                            continue;
+                        }
                         command = defaultCommand;
                         list.dispatchEvent(createEvent(command.name, command.shortcut));
                         item.classList.remove("error");
@@ -124,7 +136,9 @@ const ShortcutCustomizeUI = {
             keyField.setAttribute("size", 15);
             keyField.addEventListener("input", update);
             keyField.addEventListener("blur", cleanKeyField);
-            if (!this.available) { keyField.setAttribute("disabled", true); }
+            if (!this.available) {
+                keyField.setAttribute("disabled", true);
+            }
 
             if (this.available) {
                 const resetButton = keyCombination.appendChild(document.createElement("button"));
@@ -164,7 +178,9 @@ const ShortcutCustomizeUI = {
         label.textContent = aLabel;
         label.checkbox = label.insertBefore(document.createElement("input"), label.firstChild);
         label.checkbox.setAttribute("type", "checkbox");
-        if (!this.available) { label.checkbox.setAttribute("disabled", true); }
+        if (!this.available) {
+            label.checkbox.setAttribute("disabled", true);
+        }
         return label;
     },
 
@@ -172,7 +188,9 @@ const ShortcutCustomizeUI = {
         aKey = aKey.trim().toLowerCase();
         const normalizedKey = aKey.replace(/\s+/g, "");
         if (/^[a-z0-9]$/i.test(normalizedKey) ||
-            /^F([1-9]|1[0-2])$/i.test(normalizedKey)) { return aKey.toUpperCase(); }
+            /^F([1-9]|1[0-2])$/i.test(normalizedKey)) {
+            return aKey.toUpperCase();
+        }
 
         switch (normalizedKey) {
             case "comma":
@@ -221,9 +239,13 @@ const ShortcutCustomizeUI = {
                 for (const map of [this.keyNameMap, this.keyNameMapLocales.global]) {
                     for (const key of Object.keys(map)) {
                         if (Array.isArray(map[key])) {
-                            if (map[key].some(aLocalizedKey => aLocalizedKey.toLowerCase() === aKey)) { return key; } // eslint-disable-line max-depth
+                            if (map[key].some(aLocalizedKey => aLocalizedKey.toLowerCase() === aKey)) {
+                                return key;
+                            } // eslint-disable-line max-depth
                         } else if (map[key] &&
-                                map[key].toLowerCase() === aKey) { return key; }
+                            map[key].toLowerCase() === aKey) {
+                            return key;
+                        }
                     }
                 }
                 break;
@@ -232,13 +254,17 @@ const ShortcutCustomizeUI = {
     },
     getLocalizedKey(aKey) {
         for (const map of [this.keyNameMap, this.keyNameMapLocales.global]) {
-            if (aKey in map) { return Array.isArray(map[aKey]) ? map[aKey][0] : map[aKey]; }
+            if (aKey in map) {
+                return Array.isArray(map[aKey]) ? map[aKey][0] : map[aKey];
+            }
         }
         return "";
     },
 
     installStyleSheet() {
-        if (this.style) { return; }
+        if (this.style) {
+            return;
+        }
         this.style = document.createElement("style");
         this.style.setAttribute("type", "text/css");
         this.style.textContent = `
@@ -317,8 +343,7 @@ const ShortcutCustomizeUI = {
         delete this.keyNameMap;
         this.keyNameMap =
             this.keyNameMapLocales[browser.i18n.getUILanguage()] ||
-            this.keyNameMapLocales[browser.i18n.getUILanguage().replace(/[-_].+$/, "")] || {}
-        ;
+            this.keyNameMapLocales[browser.i18n.getUILanguage().replace(/[-_].+$/, "")] || {};
         return this.keyNameMap;
     }
 };

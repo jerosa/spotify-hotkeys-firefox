@@ -4,7 +4,9 @@ async function init() {
     const commands = await browser.commands.getAll();
 
     function sendCommand(ev) {
-        const { command } = ev.target.closest("li").dataset;
+        const {
+            command
+        } = ev.target.closest("li").dataset;
         if (command !== undefined) {
             browser.runtime.sendMessage(command);
         }
@@ -32,7 +34,8 @@ async function init() {
     // Create the commands list
     const commandsFragment = document.createDocumentFragment();
     for (const command in commands) {
-        commandsFragment.appendChild(createCommandMarkup(commands[command].name, commands[command]));
+        const li = createCommandMarkup(commands[command].name, commands[command]);
+        commandsFragment.appendChild(li);
     }
     document.querySelector("#commands").appendChild(commandsFragment);
 }

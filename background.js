@@ -59,34 +59,32 @@ async function runCommand(command) {
         const {
             hostname
         } = new URL(tabs[i].url);
-        if (hostname === "play.spotify.com") {
-            code = `document.getElementById('app-player').contentDocument.getElementById('${command}').click()`;
-        } else if (hostname === "open.spotify.com") {
+        if (hostname === "open.spotify.com") {
             switch (command) {
                 case "play-pause":
-                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PLAY}].click()`;
+                    code = getControlButtonCode(CONTROL_BUTTON_INDEXES.PLAY);
                     break;
                 case "next":
-                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.NEXT}].click()`;
+                    code = getControlButtonCode(CONTROL_BUTTON_INDEXES.NEXT);
                     break;
                 case "previous":
-                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.PREVIOUS}].click()`;
+                    code = getControlButtonCode(CONTROL_BUTTON_INDEXES.PREVIOUS);
                     break;
                 case "shuffle":
-                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.SHUFFLE}].click()`;
+                    code = getControlButtonCode(CONTROL_BUTTON_INDEXES.SHUFFLE);
                     break;
                 case "repeat":
-                    code = `document.querySelectorAll('div.player-controls__buttons button')[${CONTROL_BUTTON_INDEXES.REPEAT}].click()`;
+                    code = getControlButtonCode(CONTROL_BUTTON_INDEXES.REPEAT);
                     break;
                 case "play-album":
-                    code = `document.querySelector("[data-testid='play-button']").click()`;
+                    code = getPlayAlbumCode();
                     break;
                 case "save-track": {
-                    code = `document.querySelector("button.control-button-heart").click()`;
+                    code = getSaveTrackCode();
                     break;
                 }
                 case "mute": {
-                    code = "document.querySelector('.volume-bar button').click()";
+                    code = getMuteCode();
                     break;
                 }
                 case "volume-up": {
@@ -107,6 +105,40 @@ async function runCommand(command) {
         }
         i++;
     }
+}
+
+function getControlButtonCode(buttonIndex) {
+    function clickButton() {
+        const controlElements = document.querySelectorAll("div.player-controls__buttons button");
+        if (!controlElements || (controlElements.length !== 5)) {
+            return;
+        }
+        controlElements[buttonIndex].click();
+    }
+    return `var buttonIndex=${buttonIndex}; ${clickButton} clickButton();`;
+}
+
+function clickCustomButton(buttonSelector) {
+    const button = document.querySelector(buttonSelector);
+    if (!button) {
+        return;
+    }
+    button.click();
+}
+
+function getPlayAlbumCode() {
+    const buttonSelector = `"[data-testid='play-button']"`;
+    return `${clickCustomButton} clickCustomButton(${buttonSelector});`;
+}
+
+function getSaveTrackCode() {
+    const buttonSelector = `"button.control-button-heart"`;
+    return `${clickCustomButton} clickCustomButton(${buttonSelector});`;
+}
+
+function getMuteCode() {
+    const buttonSelector = `".volume-bar button"`;
+    return `${clickCustomButton} clickCustomButton(${buttonSelector});`;
 }
 
 function getVolumeCode(volumeDelta) {
