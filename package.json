@@ -5,7 +5,7 @@
   "main": "background.js",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^8.0.1"
+    "eslint": "^8.27.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
