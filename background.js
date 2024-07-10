@@ -109,8 +109,9 @@ async function runCommand(command) {
 
 function getControlButtonCode(buttonIndex) {
     function clickButton() {
-        const controlElements = document.querySelectorAll("div.player-controls__buttons button");
+        const controlElements = document.querySelectorAll("[data-testid=player-controls] button");
         if (!controlElements || (controlElements.length !== 5)) {
+            console.error("Unable to get Player Controls");
             return;
         }
         controlElements[buttonIndex].click();
@@ -132,24 +133,24 @@ function getPlayAlbumCode() {
 }
 
 function getSaveTrackCode() {
-    const buttonSelector = `"button.control-button-heart"`;
+    const buttonSelector = `"button[aria-label='Add to Liked Songs']"`;
     return `${clickCustomButton} clickCustomButton(${buttonSelector});`;
 }
 
 function getMuteCode() {
-    const buttonSelector = `".volume-bar button"`;
+    const buttonSelector = `"[data-testid=volume-bar-toggle-mute-button]"`;
     return `${clickCustomButton} clickCustomButton(${buttonSelector});`;
 }
 
 function getVolumeCode(volumeDelta) {
     function setVolume() {
-        const volumeElement = document.querySelector(".volume-bar");
+        const volumeElement = document.querySelector("[data-testid=volume-bar] input");
 
         if (!volumeElement) {
             return;
         }
 
-        const event = new WheelEvent("wheel", {
+        const event = new WheelEvent("syntheticWheel", {
             bubbles: true,
             cancelable: true,
             view: window,
