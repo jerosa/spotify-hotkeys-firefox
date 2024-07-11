@@ -1,4 +1,4 @@
-/* global browser document window WheelEvent */
+/* global browser document HTMLInputElement */
 
 const defaultSettings = {
     openSpotify: true,
@@ -32,8 +32,8 @@ const CONTROL_BUTTON_INDEXES = {
 };
 
 const CONTROL_VOLUME_DELTA = {
-    UP: -60,
-    DOWN: 60
+    UP: 1,
+    DOWN: 0
 };
 
 async function runCommand(command) {
@@ -150,14 +150,9 @@ function getVolumeCode(volumeDelta) {
             return;
         }
 
-        const event = new WheelEvent("syntheticWheel", {
-            bubbles: true,
-            cancelable: true,
-            view: window,
-            deltaY: volumeDelta
-        });
-
-        volumeElement.dispatchEvent(event);
+        const valSet = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
+        valSet.call(volumeElement, volumeDelta);
+        volumeElement.dispatchEvent(new Event("change", { volumeDelta, bubbles: true }));
     }
 
     return `var volumeDelta=${volumeDelta}; ${setVolume} setVolume();`;
