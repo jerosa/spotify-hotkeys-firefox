@@ -5,9 +5,43 @@
     "author": "TsunDoge",
     "version": "2.0.0",
     "homepage_url": "https://github.com/TsunDoge/spotify-hotkeys-firefox",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{82a01566-f5cf-4c86-9aec-7da38b2a7385}"
+        }
+    },
     "icons": {
         "64": "icons/logo-64.png"
     },
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://open.spotify.com/*",
+                "https://play.spotify.com/*"
+            ],
+            "js": [
+                "js/vendor.js",
+                "js/content_script.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "permissions": [
+        "storage",
+        "scripting",
+        "tabs",
+        "contextMenus",
+        "activeTab"
+    ],
+    "host_permissions": [
+        "https://open.spotify.com/*",
+        "https://play.spotify.com/*"
+    ],
     "commands": {
         "play-pause": {
             "suggested_key": {

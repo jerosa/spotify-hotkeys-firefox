@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import ".options.css";
 
 const Options = () => {
+  const [open, setOpen] = useState<boolean>(true);
+
+  useEffect(() => {
+    browser.storage.sync.get(["openSpotify"]).then(res => {
+      if (res.openSpotify !== undefined) {
+        setOpen(res.openSpotify);
+      }
+    });
+  }, []);
+
+  const saveOptions = () => {
+    setOpen(!open);
+    browser.storage.sync.set({ openSpotify: !open });
+  };
+
   return (
     <>
       <p>
@@ -14,6 +28,9 @@ const Options = () => {
         <label>
           <input
             type="checkbox"
+            checked={open}
+            onChange={(event) => setOpen(event.target.checked)}
+            onClick={saveOptions}
           />
           Open Spotify with shortcuts
         </label>
