@@ -3,8 +3,12 @@ const chOpenSpotify = document.querySelector("input[id=chOpenSpotify]");
 const chSpotifyNotifications = document.querySelector("input[id=chSpotifyNotifications]");
 
 browser.storage.sync.get().then(res => {
-    chOpenSpotify.checked = res.openSpotify;
-    chSpotifyNotifications.checked = res.spotifyNotifications;
+    if (res.openSpotify !== undefined) {
+        chOpenSpotify.checked = res.openSpotify;
+    }
+    if (res.spotifyNotifications !== undefined) {
+        chSpotifyNotifications.checked = res.spotifyNotifications;
+    }
 });
 
 // Listener to update settings

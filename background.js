@@ -10,11 +10,14 @@ On startup, check whether we have stored settings.
 If we don't, then store the default settings.
 */
 function checkStoredSettings(storedSettings) {
+    const missing = {};
     for (const key in defaultSettings) {
         if (!Object.prototype.hasOwnProperty.call(storedSettings, key)) {
-            browser.storage.sync.set(defaultSettings);
-            return;
+            missing[key] = defaultSettings[key];
         }
+    }
+    if (Object.keys(missing).length > 0) {
+        browser.storage.sync.set(missing);
     }
 }
 
@@ -32,8 +35,8 @@ const CONTROL_BUTTON_INDEXES = {
 };
 
 const CONTROL_VOLUME_DELTA = {
-    UP: 1,
-    DOWN: 0
+    UP: 0.05,
+    DOWN: -0.05
 };
 
 async function runCommand(command) {
@@ -144,17 +147,22 @@ function getMuteCode() {
 
 function getVolumeCode(volumeDelta) {
     function setVolume() {
-        const volumeElement = document.querySelector("[data-testid=volume-bar] input");
-
+        const volumeElement = document.querySelector(
+            "[data-testid=volume-bar] input"
+        );
         if (!volumeElement) {
             return;
         }
-
-        const valSet = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
-        valSet.call(volumeElement, volumeDelta);
-        volumeElement.dispatchEvent(new Event("change", { volumeDelta, bubbles: true }));
+        const current = parseFloat(volumeElement.value) || 0;
+        const next = Math.min(1, Math.max(0, current + volumeDelta));
+        const valSet = Object.getOwnPropertyDescriptor(
+            HTMLInputElement.prototype, "value"
+        ).set;
+        valSet.call(volumeElement, next);
+        volumeElement.dispatchEvent(
+            new Event("change", { bubbles: true })
+        );
     }
-
     return `var volumeDelta=${volumeDelta}; ${setVolume} setVolume();`;
 }
 

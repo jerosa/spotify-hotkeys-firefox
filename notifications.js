@@ -1,6 +1,6 @@
 /* global browser document MutationObserver */
 
-var notifications = {
+const notifications = {
 
     createNotificationObserver(trackInfo) {
         return new MutationObserver(() => {
@@ -10,7 +10,7 @@ var notifications = {
 
     getTrackData(trackInfo) {
         const elements = trackInfo.querySelectorAll("a");
-        if (elements.length < 3) throw console.error("Not found correct track info");
+        if (elements.length < 3) throw new Error("Not found correct track info");
 
         const [image, track, ...artists] = elements;
         const trackImage = image.querySelector(".now-playing__cover-art img").src;
