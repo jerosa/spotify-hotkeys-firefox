@@ -14,7 +14,7 @@ const CONTROL_BUTTON_INDEXES = {
     repeat: 4
 };
 
-const VOLUME_DELTA = 0.05;
+const VOLUME_DELTA = 0.1;
 
 function clickControlButton(command) {
     const index = CONTROL_BUTTON_INDEXES[command];
@@ -44,7 +44,7 @@ function adjustVolume(direction) {
         HTMLInputElement.prototype, "value"
     ).set;
     valSet.call(volumeElement, next);
-    volumeElement.dispatchEvent(new Event("change", { bubbles: true }));
+    volumeElement.dispatchEvent(new Event("input", { bubbles: true }));
 }
 
 const COMMAND_HANDLERS = {
