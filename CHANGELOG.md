@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-03-19
+### Fixed
+- Fix `throw console.error()` throwing undefined instead of an Error
+- Fix `var` → `const` in notifications.js
+- Fix `checkStoredSettings` overwriting all defaults when a single key is missing
+- Fix options page not validating settings existence before assigning
+- Fix volume control: use `input` event and align delta to slider step (0.1)
+- Fix save track selector: use `now-playing-widget` instead of language-dependent `aria-label`
+
+### Changed
+- Migrate from `executeScript({code})` to content script + message passing
+- Centralize all Spotify DOM selectors in `spotify-player.js`
+- Unify two `onMessage` listeners into one with type dispatch
+- ESLint env: `node` → `browser` + `webextensions`
+- Add `web-ext` to devDependencies with `start`/`build` scripts
+- Add `lang="en"` to panel and options HTML
+
 ## [1.5.5] - 2024-07-11
 ### Fixed
 - Fix volume up/down commands
