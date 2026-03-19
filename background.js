@@ -1,5 +1,3 @@
-/* global browser document HTMLInputElement */
-
 const defaultSettings = {
     openSpotify: true,
     spotifyNotifications: true
@@ -187,10 +185,11 @@ function createNotification(request) {
  * Fired when a registered command is activated using a keyboard shortcut.
  */
 browser.commands.onCommand.addListener(runCommand);
-browser.runtime.onMessage.addListener(runCommand);
 // eslint-disable-next-line no-unused-vars
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.src === "spotifyNotifications.notification") {
+browser.runtime.onMessage.addListener((request, sender) => {
+    if (typeof request === "string") {
+        runCommand(request);
+    } else if (request.src === "spotifyNotifications.notification") {
         createNotification(request);
     }
 });

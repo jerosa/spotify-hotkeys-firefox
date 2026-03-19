@@ -1,4 +1,3 @@
-/* global browser document */
 const chOpenSpotify = document.querySelector("input[id=chOpenSpotify]");
 const chSpotifyNotifications = document.querySelector("input[id=chSpotifyNotifications]");
 

@@ -1,5 +1,3 @@
-/* global browser document MutationObserver */
-
 const notifications = {
 
     createNotificationObserver(trackInfo) {

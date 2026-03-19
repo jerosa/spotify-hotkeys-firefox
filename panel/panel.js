@@ -1,4 +1,3 @@
-/* global browser document */
 async function init() {
     const manifest = browser.runtime.getManifest();
     const commands = await browser.commands.getAll();

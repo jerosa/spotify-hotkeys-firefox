@@ -3,13 +3,15 @@
   "version": "1.5.5",
   "description": "This extension adds keyboard shortcuts to Firefox to play, pause, next and previous tracks in Spotify Web Player",
   "main": "background.js",
-  "dependencies": {},
   "devDependencies": {
-    "eslint": "^8.27.0"
+    "eslint": "^8.27.0",
+    "web-ext": "^10.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "start": "web-ext run",
+    "build": "web-ext build"
   },
   "repository": {
     "type": "git",
