@@ -1,7 +1,7 @@
 const SELECTORS = {
     playerControls: "[data-testid=player-controls] button",
     playAlbum: "[data-testid='play-button']",
-    saveTrack: "button[aria-label='Add to Liked Songs']",
+    saveTrack: "[data-testid='now-playing-widget'] button[data-encore-id='buttonTertiary']",
     muteButton: "[data-testid=volume-bar-toggle-mute-button]",
     volumeBar: "[data-testid=volume-bar] input"
 };
