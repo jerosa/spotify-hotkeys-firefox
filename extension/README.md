@@ -46,5 +46,3 @@ The options page allows the user to configure the following settings:
 
 - **Open Spotify with shortcuts**: When a shortcut is pressed, open Spotify if it is not already open.
 - **Create notifications when song changes**: Show a desktop notification with track info on song change.
-
-See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts) for more information.
