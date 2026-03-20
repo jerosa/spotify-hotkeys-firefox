@@ -9,27 +9,36 @@
 </head>
 
 <body>
-    <p style="text-align: center;">
-        <a href="https://addons.mozilla.org/es/firefox/addon/spotify-hotkeys/">Add a Review</a> |
-        <a href="https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts">Documentation</a> |
-        <a href="https://github.com/TsunDoge/spotify-hotkeys-firefox/issues">Support</a>
-    </p>
-    <br />
-    <h1>Settings</h1>
-    <ul>
-        <li class="setting">
-            <input type="checkbox" id="chOpenSpotify">
-            <label for="chOpenSpotify">Open Spotify with shortcuts</label>
-        </li>
-        <li class="setting">
-            <input type="checkbox" id="chSpotifyNotifications">
-            <label for="chSpotifyNotifications">Create notifications when song changes</label>
-        </li>
-    </ul>
-    <h1>Shortcuts</h1>
-    <div id="shortcuts"></div>
-    <script type="application/javascript" src="../scripts/ShortcutCustomizeUI.js"></script>
-    <script type="application/javascript" src="options.js"></script>
+    <main>
+        <h2>Settings</h2>
+        <ul>
+            <li class="setting">
+                <input type="checkbox" id="chOpenSpotify">
+                <label for="chOpenSpotify">Open Spotify with shortcuts</label>
+            </li>
+            <li class="setting">
+                <input type="checkbox" id="chSpotifyNotifications">
+                <label for="chSpotifyNotifications">
+                    Create notifications when song changes
+                </label>
+            </li>
+        </ul>
+        <h2>Shortcuts</h2>
+        <p>
+            Customize keyboard shortcuts in
+            <a href="https://support.mozilla.org/kb/manage-extension-shortcuts-firefox"
+               target="_blank" rel="noopener">Firefox extension settings</a>.
+        </p>
+    </main>
+    <footer>
+        <a href="https://addons.mozilla.org/firefox/addon/spotify-hotkeys/"
+           target="_blank" rel="noopener">Add a Review</a> |
+        <a href="https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts"
+           target="_blank" rel="noopener">Documentation</a> |
+        <a href="https://github.com/TsunDoge/spotify-hotkeys-firefox/issues"
+           target="_blank" rel="noopener">Support</a>
+    </footer>
+    <script src="options.js"></script>
 </body>
 
 </html>

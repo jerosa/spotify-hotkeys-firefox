@@ -1,19 +1,24 @@
 body {
     font-family: sans-serif;
-    padding: 0 .5rem;
+    font-size: 14px;
+    padding: 0;
     margin: 0;
     background: rgb(40, 40, 40);
     color: rgb(170, 170, 170);
     user-select: none;
 }
 
-#main {
-    padding: .5rem;
+main {
+    padding: .5rem .75rem;
+    min-width: 260px;
 }
 
 h2 {
     color: rgb(30, 215, 96);
-    margin: .5rem .5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: .5rem 0 .75rem;
 }
 
 p {
@@ -22,26 +27,46 @@ p {
 
 ul {
     padding: 0;
+    margin: 0;
 }
 
 li {
     list-style: none;
-    padding: .2rem .5rem;
+    padding: .4rem .5rem;
     color: rgb(170, 170, 170);
-    border-right: 3px solid rgb(40, 40, 40);
+    border-right: 3px solid transparent;
+    border-bottom: 1px solid rgb(50, 50, 50);
     cursor: pointer;
+    transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
-    li p::first-letter {
-        text-transform: uppercase;
-    }
+li:last-child {
+    border-bottom: none;
+}
 
-    small {
-        color: rgb(140, 140, 140);
-    }
-
-li:hover {
+li:hover,
+li:focus-visible {
     color: white;
-    background: linear-gradient(270deg, rgb(40, 40, 40), rgb(25, 25, 25));
-    border-right: 3px solid rgb(30, 215, 96);
+    background: linear-gradient(90deg, rgb(40, 40, 40), rgb(25, 25, 25));
+    border-right-color: rgb(30, 215, 96);
+    outline: none;
+}
+
+li:active {
+    opacity: 0.7;
+}
+
+.command-description {
+    font-size: 0.9rem;
+    margin-bottom: 1px;
+}
+
+kbd {
+    font-family: inherit;
+    font-size: 0.7rem;
+    color: rgb(130, 130, 130);
+    background: rgb(30, 30, 30);
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid rgb(55, 55, 55);
 }

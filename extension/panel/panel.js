@@ -3,40 +3,53 @@ async function init() {
     const commands = await browser.commands.getAll();
 
     function sendCommand(ev) {
-        const {
-            command
-        } = ev.target.closest("li").dataset;
+        const li = ev.target.closest("li");
+        if (!li) return;
+        const { command } = li.dataset;
         if (command !== undefined) {
-            browser.runtime.sendMessage(command);
+            browser.runtime.sendMessage(command).catch(
+                (e) => console.log(e)
+            );
         }
     }
 
-    function createCommandMarkup(commandName, command) {
+    function handleKeydown(ev) {
+        if (ev.key === "Enter" || ev.key === " ") {
+            ev.preventDefault();
+            sendCommand(ev);
+        }
+    }
+
+    function createCommandMarkup(command) {
         const li = document.createElement("li");
-        li.dataset.command = `${commandName}`;
-        const p1 = document.createElement("p");
-        p1.appendChild(document.createTextNode(`${commandName} - ${command.shortcut}`));
-        li.appendChild(p1);
-        const p2 = document.createElement("p");
-        const small = document.createElement("small");
-        small.appendChild(document.createTextNode(`${command.description}`));
-        p2.appendChild(small);
-        li.appendChild(p2);
+        li.dataset.command = command.name;
+        li.setAttribute("role", "button");
+        li.setAttribute("tabindex", "0");
+
+        const description = document.createElement("p");
+        description.classList.add("command-description");
+        description.textContent = command.description;
+        li.appendChild(description);
+
+        const shortcut = document.createElement("p");
+        const kbd = document.createElement("kbd");
+        kbd.textContent = command.shortcut || "Not set";
+        shortcut.appendChild(kbd);
+        li.appendChild(shortcut);
+
         li.addEventListener("click", sendCommand);
+        li.addEventListener("keydown", handleKeydown);
         return li;
     }
 
-    // Set title
-    const content = document.querySelector("#title");
-    content.appendChild(document.createTextNode(manifest.name));
+    document.querySelector("#title").textContent = manifest.name;
 
-    // Create the commands list
-    const commandsFragment = document.createDocumentFragment();
-    for (const command in commands) {
-        const li = createCommandMarkup(commands[command].name, commands[command]);
-        commandsFragment.appendChild(li);
+    const fragment = document.createDocumentFragment();
+    for (const command of commands) {
+        if (command.name.startsWith("_")) continue;
+        fragment.appendChild(createCommandMarkup(command));
     }
-    document.querySelector("#commands").appendChild(commandsFragment);
+    document.querySelector("#commands").appendChild(fragment);
 }
 
-init();
+init().catch((e) => console.error(e));

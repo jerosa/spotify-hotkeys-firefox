@@ -3,7 +3,7 @@
     "description": "Keyboard shortcuts to play, pause, next and previous tracks in Spotify Web Player.",
     "manifest_version": 3,
     "author": "TsunDoge",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "homepage_url": "https://github.com/TsunDoge/spotify-hotkeys-firefox",
     "browser_specific_settings": {
         "gecko": {

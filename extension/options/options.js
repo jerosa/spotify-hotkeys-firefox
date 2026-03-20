@@ -1,19 +1,22 @@
-const chOpenSpotify = document.querySelector("input[id=chOpenSpotify]");
-const chSpotifyNotifications = document.querySelector("input[id=chSpotifyNotifications]");
+const chOpenSpotify = document.getElementById("chOpenSpotify");
+const chSpotifyNotifications = document.getElementById("chSpotifyNotifications");
 
-browser.storage.sync.get().then(res => {
+browser.storage.sync.get().then((res) => {
     if (res.openSpotify !== undefined) {
         chOpenSpotify.checked = res.openSpotify;
     }
     if (res.spotifyNotifications !== undefined) {
         chSpotifyNotifications.checked = res.spotifyNotifications;
     }
-});
+}).catch((e) => console.error(e));
 
-// Listener to update settings
 chOpenSpotify.addEventListener("change", (event) => {
-    browser.storage.sync.set({ openSpotify: event.target.checked });
+    browser.storage.sync.set({ openSpotify: event.target.checked }).catch(
+        (e) => console.error(e)
+    );
 });
 chSpotifyNotifications.addEventListener("change", (event) => {
-    browser.storage.sync.set({ spotifyNotifications: event.target.checked });
+    browser.storage.sync.set({ spotifyNotifications: event.target.checked }).catch(
+        (e) => console.error(e)
+    );
 });
