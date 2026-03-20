@@ -1,59 +1,97 @@
+const NOTIFICATION_SELECTORS = {
+    nowPlaying: "[data-testid='now-playing-widget']",
+    coverArt: "[data-testid='cover-art-image']",
+    trackName: "[data-testid='context-item-link']",
+    artistName: "[data-testid='context-item-info-artist']"
+};
+
 const notifications = {
+
+    lastTrackName: null,
 
     createNotificationObserver(trackInfo) {
         return new MutationObserver(() => {
-            this.sendNotification(trackInfo);
+            try {
+                const data = this.getTrackData(trackInfo);
+                if (data.name !== this.lastTrackName) {
+                    this.lastTrackName = data.name;
+                    browser.runtime.sendMessage({
+                        src: "spotifyNotifications.notification",
+                        data: data
+                    });
+                }
+            } catch (e) {
+                // Track info not ready yet
+            }
         });
     },
 
     getTrackData(trackInfo) {
-        const elements = trackInfo.querySelectorAll("a");
-        if (elements.length < 3) throw new Error("Not found correct track info");
+        const image = trackInfo.querySelector(NOTIFICATION_SELECTORS.coverArt);
+        const track = trackInfo.querySelector(NOTIFICATION_SELECTORS.trackName);
+        const artists = trackInfo.querySelectorAll(
+            NOTIFICATION_SELECTORS.artistName
+        );
 
-        const [image, track, ...artists] = elements;
-        const trackImage = image.querySelector(".now-playing__cover-art img").src;
-        const trackName = track.textContent;
-        const trackArtists = artists.map(e => e.textContent).join(", ");
+        if (!image || !track || artists.length === 0) {
+            throw new Error("Not found correct track info");
+        }
 
         return {
-            name: trackName,
-            artists: trackArtists,
-            image: trackImage
+            name: track.textContent,
+            artists: Array.from(artists).map(e => e.textContent).join(", "),
+            image: image.src
         };
     },
 
     sendNotification(trackInfo) {
-        const data = this.getTrackData(trackInfo);
-        browser.runtime.sendMessage({ src: "spotifyNotifications.notification", data: data });
+        try {
+            const data = this.getTrackData(trackInfo);
+            this.lastTrackName = data.name;
+            browser.runtime.sendMessage({
+                src: "spotifyNotifications.notification",
+                data: data
+            });
+        } catch (e) {
+            // Track info not ready yet
+        }
     },
 
     findTrackInfo() {
         return new Promise(resolve => {
-            const observer = new MutationObserver((records, instance) => {
-                records.forEach(record => {
-                    record.addedNodes.forEach(node => {
-                        if (node.classList.contains("now-playing")) {
-                            instance.disconnect();
-                            resolve(node);
-                        }
-                    });
-                });
-            });
-            const body = document.querySelector("body");
-            observer.observe(body, { childList: true, subtree: true });
-
-            const nodes = body.querySelector(".now-playing");
-            if (nodes) {
-                observer.disconnect();
-                resolve(nodes);
+            const existing = document.querySelector(
+                NOTIFICATION_SELECTORS.nowPlaying
+            );
+            if (existing) {
+                resolve(existing);
+                return;
             }
+
+            const observer = new MutationObserver((records, instance) => {
+                const node = document.querySelector(
+                    NOTIFICATION_SELECTORS.nowPlaying
+                );
+                if (node) {
+                    instance.disconnect();
+                    resolve(node);
+                }
+            });
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         });
     },
 
     run() {
         this.findTrackInfo().then(trackInfo => {
-            this.notificationObserver = this.createNotificationObserver(trackInfo);
-            this.notificationObserver.observe(trackInfo, { characterData: true, subtree: true });
+            this.notificationObserver =
+                this.createNotificationObserver(trackInfo);
+            this.notificationObserver.observe(trackInfo, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
             this.sendNotification(trackInfo);
         });
     }

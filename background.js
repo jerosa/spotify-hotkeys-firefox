@@ -67,8 +67,7 @@ function createNotification(request) {
 }
 
 browser.commands.onCommand.addListener(sendCommandToSpotify);
-// eslint-disable-next-line no-unused-vars
-browser.runtime.onMessage.addListener((request, sender) => {
+browser.runtime.onMessage.addListener((request) => {
     if (typeof request === "string") {
         sendCommandToSpotify(request);
     } else if (request.src === "spotifyNotifications.notification") {
