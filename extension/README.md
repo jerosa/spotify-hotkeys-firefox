@@ -20,9 +20,9 @@ Default Keyboard shortcuts are:
 - Volume Down : Alt + Shift + Down Arrow
 ```
 
-The `Play Album or PlayGreen` shortcut play also play/pause the songs like the `Play/Pause` shortcut but is useful when Spotify Web Player gets stuck with an ad.
+The `Play Album` shortcut can also play/pause songs like the `Play/Pause` shortcut but is useful when Spotify Web Player gets stuck with an ad.
 
-Instead of using the keybord it's possible to click on the icon of the toolbar which will show the keybindings.
+Instead of using the keyboard, it's possible to click on the toolbar icon which will show the keybindings.
 
 ## Installation
 
@@ -30,29 +30,21 @@ You can find the signed Firefox Extension at https://addons.mozilla.org/en-US/fi
 
 ## [Customizing the shortcuts](https://support.mozilla.org/en-US/kb/manage-extension-shortcuts-firefox)
 
-You can now change your extensions' keyboard shortcuts on the add-ons page.
+You can change your extensions' keyboard shortcuts on the add-ons page.
 
 1. Click the menu button, click `Add-ons` and select `Extensions`.
 2. Click the Tools for all add-ons cogwheel.
 3. Click `Manage Extension Shortcuts` in the menu.
-4. You will see the shortcut options (if available) for your installed add-ons. 
+4. You will see the shortcut options (if available) for your installed add-ons.
 
 ![(Screenshot of managing extension shortcuts 1)](images/ManageExtensions1.png)
 ![(Screenshot of managing extension shortcuts 2)](images/ManageExtensions2.png)
 
-## Option page
+## Options page
 
-The option page of the extension allows the user to customize the shortcuts and some settings. See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts) for more information.
+The options page allows the user to configure the following settings:
 
-### Settings
+- **Open Spotify with shortcuts**: When a shortcut is pressed, open Spotify if it is not already open.
+- **Create notifications when song changes**: Show a desktop notification with track info on song change.
 
-The following options can be enabled/disabled in the option page.
-
-- Open Spotify with shortcuts: When the user hit a shortcut open spotify if it is not opened yet.
-- Create notifications when song changes
-
-### Custom Shorcuts **(legacy)**
-
-It is possible to change the default shortcuts to custom ones in the option page of the addon. See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts#configure-shortcuts) for more information.
-
-**NOTE:** On Firefox >= 66.0-build3 or Firefox >= 67.0a1 a new interface has been implemented to change the default shortcuts. See the [docs](https://support.mozilla.org/en-US/kb/manage-extension-shortcuts-firefox)
+See the [wiki](https://github.com/TsunDoge/spotify-hotkeys-firefox/wiki/How-to-use-Spotify-Shortcuts) for more information.
