@@ -1,8 +1,8 @@
 # Spotify Web Player Hotkeys Firefox Extension
 
-This extension adds keyboard shortcuts to Firefox to play, pause, next and previous tracks in [Spotify Web Player](https://open.spotify.com).
+This extension adds global keyboard shortcuts to Firefox to control [Spotify Web Player](https://open.spotify.com) — play, pause, skip, volume, shuffle, repeat, and more.
 
-![(Screenshot of running extension)](images/Spotify.png)
+![(Screenshot of extension panel)](images/SpotifyPanel.png)
 
 ## Usage
 
@@ -18,6 +18,8 @@ Default Keyboard shortcuts are:
 - Mute/Unmute : Alt + Shift + M
 - Volume Up   : Alt + Shift + Up Arrow
 - Volume Down : Alt + Shift + Down Arrow
+- Skip Forward: Alt + Shift + Period
+- Skip Back   : Alt + Shift + Comma
 ```
 
 The `Play Album` shortcut can also play/pause songs like the `Play/Pause` shortcut but is useful when Spotify Web Player gets stuck with an ad.
@@ -46,3 +48,6 @@ The options page allows the user to configure the following settings:
 
 - **Open Spotify with shortcuts**: When a shortcut is pressed, open Spotify if it is not already open.
 - **Create notifications when song changes**: Show a desktop notification with track info on song change.
+- **Skip duration**: How many seconds to skip forward or back (1–60 seconds, default 10).
+
+![(Screenshot of options page)](images/OptionPage.png)

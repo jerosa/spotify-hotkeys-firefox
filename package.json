@@ -1,8 +1,7 @@
 {
   "name": "spotify-hotkeys-firefox",
   "version": "2.1.0",
-  "description": "This extension adds keyboard shortcuts to Firefox to play, pause, next and previous tracks in Spotify Web Player",
-  "main": "extension/background.js",
+  "description": "Global keyboard shortcuts to control Spotify Web Player — play, skip, volume, shuffle, and more.",
   "devDependencies": {
     "eslint": "^8.27.0",
     "web-ext": "^10.0.0"

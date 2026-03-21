@@ -1,10 +1,10 @@
 {
     "name": "Spotify Hotkeys",
-    "description": "Keyboard shortcuts to play, pause, next and previous tracks in Spotify Web Player.",
+    "description": "Global keyboard shortcuts to control Spotify Web Player — play, skip, volume, shuffle, and more.",
     "manifest_version": 3,
-    "author": "TsunDoge",
+    "author": "jerosa",
     "version": "2.1.0",
-    "homepage_url": "https://github.com/TsunDoge/spotify-hotkeys-firefox",
+    "homepage_url": "https://github.com/jerosa/spotify-hotkeys-firefox",
     "browser_specific_settings": {
         "gecko": {
             "id": "{82a01566-f5cf-4c86-9aec-7da38b2a7385}",

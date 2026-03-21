@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-03-21
+### Added
+- skip-forward and skip-back commands with configurable duration
+- Skip duration setting in options page (1–60 seconds, default 10)
+- Reset button for skip duration in options page
+- `gecko` `data_collection_permissions` (no data collection declared)
+
+### Changed
+- Panel and options page UI improvements
+
+### Removed
+- Redundant `host_permissions` from manifest
+
 ## [2.0.0] - 2026-03-20
 ### Changed
 - Migrate from Manifest V2 to Manifest V3
@@ -56,14 +69,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add timeout of 3 seconds to the notifications.
 - Added CHANGELOG.md.
 
-## Changed
+### Changed
 - Change default hotkeys due to Firefox using the previous ones.
 
 ### Fixed
 - Query buttons by title due to Firefox autogenerating the css classes.
 
 ## [1.5.0] - 2020-09-20
-## Added
+### Added
 - Add notifications with the current playing song info.
 
 This project is MIT Licensed // Created & maintained by Jerosa
