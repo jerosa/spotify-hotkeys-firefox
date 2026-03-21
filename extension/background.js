@@ -1,6 +1,7 @@
 const defaultSettings = {
     openSpotify: true,
-    spotifyNotifications: true
+    spotifyNotifications: true,
+    skipSeconds: 10
 };
 
 /*

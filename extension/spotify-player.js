@@ -3,7 +3,8 @@ const SELECTORS = {
     playAlbum: "[data-testid='play-button']",
     saveTrack: "[data-testid='now-playing-widget'] button[data-encore-id='buttonTertiary']",
     muteButton: "[data-testid=volume-bar-toggle-mute-button]",
-    volumeBar: "[data-testid=volume-bar] input"
+    volumeBar: "[data-testid=volume-bar] input",
+    progressBar: "input[type='range'][aria-valuetext]"
 };
 
 const CONTROL_BUTTON_INDEXES = {
@@ -15,6 +16,20 @@ const CONTROL_BUTTON_INDEXES = {
 };
 
 const VOLUME_DELTA = 0.1;
+const DEFAULT_SKIP_SECONDS = 10;
+let skipSeconds = DEFAULT_SKIP_SECONDS;
+
+browser.storage.sync.get("skipSeconds").then((res) => {
+    if (res.skipSeconds !== undefined) {
+        ({ skipSeconds } = res);
+    }
+});
+
+browser.storage.onChanged.addListener((changes) => {
+    if (changes.skipSeconds) {
+        skipSeconds = changes.skipSeconds.newValue;
+    }
+});
 
 function clickControlButton(command) {
     const index = CONTROL_BUTTON_INDEXES[command];
@@ -47,6 +62,23 @@ function adjustVolume(direction) {
     volumeElement.dispatchEvent(new Event("input", { bubbles: true }));
 }
 
+function skipPlayback(direction) {
+    const progressBar = document.querySelector(SELECTORS.progressBar);
+    if (!progressBar) return;
+
+    const current = parseFloat(progressBar.value) || 0;
+    const max = parseFloat(progressBar.max) || 0;
+    const seconds = Math.max(1, Math.min(60, skipSeconds || DEFAULT_SKIP_SECONDS));
+    const delta = direction === "forward" ? seconds * 1000 : -(seconds * 1000);
+    const next = Math.min(max, Math.max(0, current + delta));
+
+    const valSet = Object.getOwnPropertyDescriptor(
+        HTMLInputElement.prototype, "value"
+    ).set;
+    valSet.call(progressBar, next);
+    progressBar.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
 const COMMAND_HANDLERS = {
     "play-pause": () => clickControlButton("play-pause"),
     next: () => clickControlButton("next"),
@@ -57,7 +89,9 @@ const COMMAND_HANDLERS = {
     "save-track": () => clickCustomButton(SELECTORS.saveTrack),
     mute: () => clickCustomButton(SELECTORS.muteButton),
     "volume-up": () => adjustVolume("up"),
-    "volume-down": () => adjustVolume("down")
+    "volume-down": () => adjustVolume("down"),
+    "skip-forward": () => skipPlayback("forward"),
+    "skip-back": () => skipPlayback("back")
 };
 
 browser.runtime.onMessage.addListener((message) => {

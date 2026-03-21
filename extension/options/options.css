@@ -68,6 +68,41 @@ ul {
     outline-offset: 2px;
 }
 
+.setting input[type="number"] {
+    width: 4em;
+    padding: 0.25em 0.4em;
+    background-color: rgb(50, 50, 50);
+    color: rgb(230, 230, 230);
+    border: 1px solid rgb(80, 80, 80);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.setting input[type="number"]:focus-visible {
+    outline: 2px solid rgb(30, 215, 96);
+    outline-offset: 2px;
+}
+
+.setting button {
+    padding: 0.25em 0.6em;
+    background-color: rgb(60, 60, 60);
+    color: rgb(170, 170, 170);
+    border: 1px solid rgb(80, 80, 80);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.setting button:hover {
+    background-color: rgb(80, 80, 80);
+    color: rgb(230, 230, 230);
+}
+
+.setting button:focus-visible {
+    outline: 2px solid rgb(30, 215, 96);
+    outline-offset: 2px;
+}
+
 .setting label {
     cursor: pointer;
 }

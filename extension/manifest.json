@@ -8,7 +8,11 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "{82a01566-f5cf-4c86-9aec-7da38b2a7385}",
-            "strict_min_version": "109.0"
+            "strict_min_version": "109.0",
+            "data_collection_permissions": {
+                "required": ["none"],
+                "optional": []
+            }
         }
     },
     "icons": {
@@ -89,6 +93,18 @@
                 "default": "Alt+Shift+Down"
             },
             "description": "Volume down"
+        },
+        "skip-forward": {
+            "suggested_key": {
+                "default": "Alt+Shift+Period"
+            },
+            "description": "Skip forward"
+        },
+        "skip-back": {
+            "suggested_key": {
+                "default": "Alt+Shift+Comma"
+            },
+            "description": "Skip back"
         }
     },
     "permissions": ["tabs", "storage", "notifications"],
