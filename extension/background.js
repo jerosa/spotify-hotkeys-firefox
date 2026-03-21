@@ -38,7 +38,7 @@ async function sendCommandToSpotify(command) {
 
     for (const tab of tabs) {
         const { hostname } = new URL(tab.url);
-        if (hostname === "open.spotify.com") {
+        if (hostname === "open.spotify.com" || hostname === "play.spotify.com") {
             browser.tabs.sendMessage(tab.id, { command }).catch(
                 (e) => console.log(e)
             );
@@ -48,6 +48,7 @@ async function sendCommandToSpotify(command) {
 }
 
 function createNotification(request) {
+    if (!request.data || !request.data.name) return;
     const gettingItem = browser.storage.sync.get("spotifyNotifications");
     gettingItem.then((res) => {
         if (res.spotifyNotifications) {

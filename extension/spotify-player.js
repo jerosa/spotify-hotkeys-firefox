@@ -68,6 +68,7 @@ function skipPlayback(direction) {
 
     const current = parseFloat(progressBar.value) || 0;
     const max = parseFloat(progressBar.max) || 0;
+    if (max <= 0 || max > 3600000) return;
     const seconds = Math.max(1, Math.min(60, skipSeconds || DEFAULT_SKIP_SECONDS));
     const delta = direction === "forward" ? seconds * 1000 : -(seconds * 1000);
     const next = Math.min(max, Math.max(0, current + delta));

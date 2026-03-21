@@ -58,6 +58,7 @@ const notifications = {
     },
 
     findTrackInfo() {
+        const FIND_TIMEOUT_MS = 30000;
         return new Promise(resolve => {
             const existing = document.querySelector(
                 NOTIFICATION_SELECTORS.nowPlaying
@@ -73,6 +74,7 @@ const notifications = {
                 );
                 if (node) {
                     instance.disconnect();
+                    clearTimeout(timeoutId);
                     resolve(node);
                 }
             });
@@ -80,11 +82,17 @@ const notifications = {
                 childList: true,
                 subtree: true
             });
+
+            const timeoutId = setTimeout(() => {
+                observer.disconnect();
+                resolve(null);
+            }, FIND_TIMEOUT_MS);
         });
     },
 
     run() {
         this.findTrackInfo().then(trackInfo => {
+            if (!trackInfo) return;
             this.notificationObserver =
                 this.createNotificationObserver(trackInfo);
             this.notificationObserver.observe(trackInfo, {
