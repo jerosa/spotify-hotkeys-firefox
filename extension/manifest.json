@@ -108,7 +108,6 @@
         }
     },
     "permissions": ["tabs", "storage", "notifications"],
-    "host_permissions": ["https://open.spotify.com/*", "https://play.spotify.com/*"],
     "action": {
         "default_icon": "icons/logo-32.png",
         "theme_icons": [{
